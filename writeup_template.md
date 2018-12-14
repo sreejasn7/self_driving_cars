@@ -1,47 +1,44 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
 ---
 
 **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
+* Attempt challenge section .
 
-
-[//]: # (Image References)
-
-[image1]: ./examples/grayscale.jpg "Grayscale"
 
 ---
 
 ### Reflection
 
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+### 1.My Initial Steps 
+* Intially I went converting the image to gray scale. HSV was attempted to attempt challenge section . After grayscale , blurring and Canny edge detection was done. Rest is as per the currrent pipeline.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+### 1. Pipeline
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+My pipeline consists of 
+* Converting an image to HSV. 
+* Thresholding the HSV image to two different yellow and white masks seperately and combining them
+* Applying the mask on the orginal image to get an image with only contours of interest
+* Canny Edge Detection on mask applied original image. 
+* Cutting of ROI
+* Applying Hough Transform
+* Working on functions to support to draw lines. 
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+### 2. Modifying the draw_lines() function.
 
-![alt text][image1]
-
-
-### 2. Identify potential shortcomings with your current pipeline
-
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+The draw_lines function 
+* Prior In order to draw a smooth line on both lanes , we need to find the slope and intercept to get a pair of (x y) points for both the lanes . This was achieved using function find_slopes_and_min_max_points. Return the points in a list as (x0, y0) and (x1,y1) for both the slopes.
+. Averaging was done for a smooth rendering of the red line marks from frame to frame. THis was achieved using getaveragexy function.
 
 
-### 3. Suggest possible improvements to your pipeline
+### 3. Identify potential shortcomings with your current pipeline
 
-A possible improvement would be to ...
+* A white vechile right in front of the vehicle can cause trouble I guess so. 
 
-Another potential improvement could be to ...
+### 4. Challenge 
+* Attempted challenge. The result does not give a smooth rendering
+
+
